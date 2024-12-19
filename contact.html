@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="lt">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Gintarė">
+  <meta name="description" content="Asmeninė svetainė apie Gintarę Černiauskaitę, jos darbai ir paslaugos.">
+  <title>Gintarė | Asmeninė svetainė</title>
+  <link rel="icon" type="image/png" href="image/favicon.webp">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+
+  <style>
+    .form-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .result-container {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+    }
+  </style>
+</head>
+
+<body class="contact-page">
+
+<header id="header" class="header d-flex align-items-center light-background sticky-top">
+  <div class="container-fluid position-relative">
+    <!-- Logo -->
+    <a href="index.html" class="logo">
+      <h1 class="sitename" style="margin-left: 20px;">Gintarė</h1>
+    </a>
+    <!-- Navigation -->
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="index.html" class="active">Pradžia</a></li>
+        <li><a href="about.html">Apie</a></li>
+        <li><a href="resume.html">Aprašymas</a></li>
+        <li><a href="portfolio.html">Atlikti darbai</a></li>
+        <li><a href="services.html">Paslaugos</a></li>
+        <li><a href="contact.html">Kontaktai</a></li>
+      </ul>
+    </nav>
+    <!-- Social Links -->
+    <div class="header-social-links" style="margin-right: 20px;">
+      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div>
+</header>
+
+  <main class="main">
+    <div class="container section-title" data-aos="fade-up">
+    <div class="form-container">
+      <h2>Konatktai</h2>
+      <form id="contactForm">
+        <label for="firstName">Vardas:</label><br>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+
+        <label for="lastName">Pavardė:</label><br>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+
+        <label for="email">El.paštas:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="phone">Tel. numeris:</label><br>
+        <input type="tel" id="phone" name="phone" required><br><br>
+
+        <label for="address">Adresas:</label><br>
+        <input type="text" id="address" name="address" required><br><br>
+
+        <label>Rate the following (1 to 10):</label><br><br>
+
+        <label for="question1">Svetainės dizainas:</label><br>
+        <input type="number" id="question1" name="question1" min="1" max="10" required><br><br>
+
+        <label for="question2">Naudojimo paprastumas:</label><br>
+        <input type="number" id="question2" name="question2" min="1" max="10" required><br><br>
+
+        <label for="question3">Turinio kokybė:</label><br>
+        <input type="number" id="question3" name="question3" min="1" max="10" required><br><br>
+
+        <label for="question4">Reagavimas:</label><br>
+        <input type="number" id="question4" name="question4" min="1" max="10" required><br><br>
+
+        <label for="question5">Bendras įspūdis:</label><br>
+        <input type="number" id="question5" name="question5" min="1" max="10" required><br><br>
+
+        <button type="button" onclick="validateAndSaveFormData()">Submit</button>
+
+      </form>
+    </div>
+
+    <div id="result" class="result-container"></div>
+  </main>
+
+  <footer id="footer" class="footer light-background">
+    <div class="container text-center">
+      <div class="social-links d-flex justify-content-center">
+        <a href="#"><i class="bi bi-facebook"></i></a>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+        <a href="#"><i class="bi bi-linkedin"></i></a>
+      </div>
+      <div class="credits">
+        Designed by Gintarė
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function saveFormData() {
+      const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        ratings: {
+          question1: parseInt(document.getElementById('question1').value),
+          question2: parseInt(document.getElementById('question2').value),
+          question3: parseInt(document.getElementById('question3').value),
+          question4: parseInt(document.getElementById('question4').value),
+          question5: parseInt(document.getElementById('question5').value),
+        }
+      };
+
+      console.log(formData);
+
+      const resultContainer = document.getElementById('result');
+      let output = '';
+      output += `<p><strong>First Name:</strong> ${formData.firstName}</p>`;
+      output += `<p><strong>Last Name:</strong> ${formData.lastName}</p>`;
+      output += `<p><strong>Email:</strong> ${formData.email}</p>`;
+      output += `<p><strong>Phone:</strong> ${formData.phone}</p>`;
+      output += `<p><strong>Address:</strong> ${formData.address}</p>`;
+
+      const ratings = formData.ratings;
+      let total = 0;
+      let count = 0;
+      for (const [key, value] of Object.entries(ratings)) {
+        output += `<p><strong>${key}:</strong> ${value}</p>`;
+        total += value;
+        count++;
+      }
+
+      const average = (total / count).toFixed(2);
+      output += `<p><strong>Average Rating:</strong> ${average}</p>`;
+      output += `<p><strong>Summary:</strong> ${formData.firstName} ${formData.lastName} (${formData.email}): ${average}</p>`;
+
+      resultContainer.innerHTML = output;
+    }
+  </script>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <script src="functions.js"></script>
+
+
+  </body>
+</html>

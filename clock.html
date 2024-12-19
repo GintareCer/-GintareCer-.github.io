@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Clock</title>
+  <style>
+    /* Basic styling for the clock */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #282c34;
+      color: #61dafb;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #clock {
+      font-size: 3rem;
+      font-weight: bold;
+      border: 3px solid #61dafb;
+      padding: 20px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Clock Container -->
+  <div id="clock">Loading...</div>
+
+  <script>
+    // Function to get current time and format it
+    function displayTime() {
+      const now = new Date(); // Get current date and time
+      const hours = String(now.getHours()).padStart(2, '0'); // Format hours to two digits
+      const minutes = String(now.getMinutes()).padStart(2, '0'); // Format minutes to two digits
+      const seconds = String(now.getSeconds()).padStart(2, '0'); // Format seconds to two digits
+
+      // Combine into a readable format (HH:MM:SS)
+      const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+      // Render time into the 'clock' div
+      document.getElementById('clock').innerText = formattedTime;
+    }
+
+    // Call the displayTime function immediately to show time on load
+    displayTime();
+
+    // Update the clock every second
+    setInterval(displayTime, 1000);
+  </script>
+
+</body>
+</html>
